@@ -105,7 +105,7 @@ export default BaseStore.extend({
     if (this.get('_fastboot.isFastBoot')) {
       return false;
     } else {
-      const visibilityState = typeof document !== 'undefined' ? document.visibilityState || 'visible';
+      const visibilityState = typeof document !== 'undefined' ? document.visibilityState || 'visible' : false;
       return visibilityState === 'visible';
     }
   }).volatile(),
