@@ -4,6 +4,7 @@ import Base from 'ember-simple-auth/session-stores/base';
 import LocalStorage from 'ember-simple-auth/session-stores/local-storage';
 import Cookie from 'ember-simple-auth/session-stores/cookie';
 import Ephemeral from 'ember-simple-auth/session-stores/ephemeral';
+import getOwner from 'ember-getowner-polyfill';
 
 const { computed } = Ember;
 
@@ -96,7 +97,7 @@ export default Base.extend({
   },
 
   _createStore(storeType, options) {
-    const store = storeType.create(options);
+    const store = storeType.create(getOwner(this).ownerInjection(), options);
 
     store.on('sessionDataUpdated', (data) => {
       this.trigger('sessionDataUpdated', data);
